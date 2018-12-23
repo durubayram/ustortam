@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function validateForm() {
+
+  var nameControl = document.querySelector("#name").value;
+  var nameRegex = /.+/;
+  var nameResult = nameRegex.test(nameControl);
+
+  var mailControl = document.querySelector("#email").value;
+  var mailRegex = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/;
+  var mailResult =mailRegex.test(mailControl);
+
+  var sayisalControl= document.querySelector("#sayisal").value;
+  var sayisalRegex =/^\d+$/;
+  var sayisalResult = sayisalRegex.test(sayisalControl);
+
+  var basamakliControl = document.querySelector("#basamakli").value;
+  var basamakliRegex =/^\d{12}$/;
+  var basamakliResult = basamakliRegex.test(basamakliControl);
+
+  var alfaControl = document.querySelector("#alfa").value;
+  var alfaRegex =/[a-zA-Z]+$/;
+  var alfaResult = alfaRegex.test(alfaControl);
+
+  var max30Control = document.querySelector("#max30").value;
+  var max30Regex =/^[a-zA-Z]{1,30}$/;
+  var max30Result = max30Regex.test(max30Control);
+
+  var uckelimeControl = document.querySelector("#uckelime").value;
+  var uckelimeRegex = /^[a-zA-Z]{3}$/;
+  var uckelimeResult = uckelimeRegex.test(uckelimeControl);
+
+  var passwordControl = document.querySelector("#password").value;
+  var passwordRegex =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8}$/;
+  var passwordResult = passwordRegex.test(passwordControl);
+
+  var list_result = [nameResult,mailResult,sayisalResult,basamakliResult,alfaResult,max30Result,uckelimeResult,passwordResult];
+  var error_result = [name_error,email_error,sayisal_error,basamakli_error,alfa_error,max30_error,uckelime_error,password_error];
+
+  for(var i=0;i<list_result.length;i++)
+  {
+    if(list_result[i] == false)
+    {
+      error_result[i].style.visibility = "visible";
+    }
+    else
+    {
+    error_result[i].style.visibility ="hidden";
+    }
+  }
+
+  for(var i=0;i<list_result.length;i++)
+  {
+    if(list_result[i] == false)
+    {
+      return false;
+    }
+  }
+
+  return true;
+
+}
+
+</script>
+</head>
+<body>
+
+<style>
+  span{
+    color:red;
+    visibility: hidden;
+  }  
+
+  #password{
+    margin-top: 17.5px;
+  }
+
+</style>
+
+<form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+  Aşağıdaki hiçbir input boş olmamalı: <br>
+  
+
+  <table >
+  <tr>
+    <td>Boş olmamalı: </td>
+    <td><input type="text" id="name"> <span id = "name_error">name must be filled out</span></td>
+    
+  </tr>
+  <tr>
+    <td>E-mail (Kurallara uygun email): </td>
+    <td><input type="text" id="email"><span id = "email_error">email must be filled correctly</span></td>
+    
+  </tr>
+  <tr>
+    <td>Sadece sayısal: </td>
+    <td><input type="text" id="sayisal"><span id = "sayisal_error">This must be filled with only digits(0-9)</span></td>
+  </tr>
+  <tr>
+    <td>Sadece sayısal olan ve 12 basamak uzunluğundaki sayi: </td>
+    <td><input type="text" id="basamakli"><span id = "basamakli_error">This must be filled with only 12 digits</span></td>
+  </tr>
+  <tr>
+    <td>Sadece harf (a..z veya A..Z): </td>
+    <td><input type="text" id="alfa"><span id = "alfa_error">This must be filled with characters</span></td>
+  </tr>
+  <tr>
+    <td>Sadece harf ve en fazla 30 uzunlukta olan string: </td>
+    <td><input type="text" id="max30"><span id = "max30_error">This must be filled with maximum 30 characters</span></td>
+  </tr>
+  <tr>
+    <td>3 kelimeden oluşan string: </td>
+    <td><input type="text" id="uckelime"><span id = "uckelime_error">This must be filled only 3 characters</span></td>
+  </tr>
+  <tr>
+    <td>En az 1 büyük harf, en az 1 küçük harf, en az bir rakam <br>ve en az 1 noktalama işareti içeren ve en az 8 uzunluğunda olan metin: </td>
+    <td><input type="text" id="password" ><span id = "password_error">This must be filled at 8 digits including at least 1 upper case, at least 1 lower case, at least one digit and at least 1 special mark.</span></td>
+  </tr>
+  
+
+</table>
+
+<br>
+  <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
