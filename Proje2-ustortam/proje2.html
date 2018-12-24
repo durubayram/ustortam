@@ -29,7 +29,7 @@ function validateForm() {
   var max30Result = max30Regex.test(max30Control);
 
   var uckelimeControl = document.querySelector("#uckelime").value;
-  var uckelimeRegex = /^[a-zA-Z]{3}$/;
+  var uckelimeRegex = /^((?:\S+\s+){2}\S+)/;
   var uckelimeResult = uckelimeRegex.test(uckelimeControl);
 
   var passwordControl = document.querySelector("#password").value;
